@@ -13,7 +13,7 @@ namespace Dziekanat.Entities
         {
         }
 
-        public DbSet<Grade> Grades { get; set; }
+        public DbSet<Grade> Grade { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ namespace Dziekanat.Entities
     {
         public GroupContext(DbContextOptions<GroupContext> options) : base(options) { }
 
-        public DbSet<Group> Groups { get; set; }
+        public DbSet<Group> Group { get; set; }
 
     }
 }

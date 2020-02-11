@@ -20,7 +20,7 @@ namespace Dziekanat
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>().UseUrls("httpps://localhost:44380");
+                    webBuilder.UseStartup<Startup>().UseUrls("https://localhost:44348");
                 });
     }
 }

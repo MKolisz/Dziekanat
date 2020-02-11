@@ -10,6 +10,6 @@ namespace Dziekanat.Entities
     {
         public DepartmentContext(DbContextOptions<DepartmentContext> options) : base(options) { }
 
-        public DbSet<Department> Departments { get; set; }
+        public DbSet<Department> Department { get; set; }
     }
 }

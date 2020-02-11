@@ -10,6 +10,6 @@ namespace Dziekanat.Entities
     {
         public student_groupContext(DbContextOptions<student_groupContext> options) : base(options) { }
 
-        public DbSet<student_group> students_groups { get; set; }
+        public DbSet<student_group> students_group { get; set; }
     }
 }

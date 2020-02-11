@@ -10,7 +10,7 @@ namespace Dziekanat.Entities
     {
         public SubjectContext(DbContextOptions<SubjectContext> options) : base(options) { }
 
-        public DbSet<Subject> Subjects { get; set; }
+        public DbSet<Subject> Subject { get; set; }
 
     }
 }
