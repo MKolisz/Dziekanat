@@ -21,39 +21,16 @@ namespace Dziekanat.Controllers
     public class EmployeeController : ControllerBase
     {
         private readonly EmployeeContext _employeeContext;
-        private readonly StudentContext _studentContext;
         private IEmployeeService _employeeService;
-        private IStudentService _studentService;
         private IMapper _mapper;
-        private readonly AppSettings _appSettings;
 
-        public EmployeeController(EmployeeContext employeeContext, StudentContext studentContext,
-            IEmployeeService employeeService, IStudentService studentService, IMapper mapper, IOptions<AppSettings> appSettings)
+        public EmployeeController(EmployeeContext employeeContext, IEmployeeService employeeService, IMapper mapper)
         {
             _employeeContext = employeeContext;
-            _studentContext = studentContext;
             _employeeService = employeeService;
-            _studentService = studentService;
-            _appSettings = appSettings.Value;
             _mapper = mapper;
         }
 
-
-        [Authorize(Roles = "Admin")]
-        [HttpPost("registerStudent")]
-        public IActionResult RegisterStudent([FromBody]StudentRegisterModel model)
-        {
-            var student = _mapper.Map<Student>(model);
-            try
-            {
-                _studentService.Create(student, model.Password);
-                return Ok();
-            }
-            catch(AppException ex)
-            {
-                return BadRequest(new { message = ex.Message });
-            }
-        }
 
         [Authorize(Roles = "Admin")]
         [HttpPost("registerEmployee")]

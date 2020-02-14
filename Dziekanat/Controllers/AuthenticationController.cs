@@ -9,6 +9,7 @@ using Dziekanat.Entities;
 using Dziekanat.Helpers;
 using Dziekanat.Models;
 using Dziekanat.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;

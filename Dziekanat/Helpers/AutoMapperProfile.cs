@@ -13,7 +13,9 @@ namespace Dziekanat.Helpers
     {
         public AutoMapperProfile()
         {
+            CreateMap<Student, StudentModel>();
             CreateMap<StudentRegisterModel, Student>();
+            CreateMap<StudentUpdateModel, Student>();
 
             CreateMap<EmployeeRegisterModel, Employee>();
         }
