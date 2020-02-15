@@ -64,9 +64,9 @@ namespace Dziekanat.Services
                 throw new AppException("User not found");
 
             if (studentParam.First_Name != null && studentParam.First_Name.Length > 30)
-                throw new AppException("Name can contain max 30 characters");
+                throw new AppException("First Name can contain max 30 characters");
             if (studentParam.Last_Name != null && studentParam.Last_Name.Length > 30)
-                throw new AppException("Name can contain max 30 characters");
+                throw new AppException("Last Name can contain max 30 characters");
 
 
 

@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dziekanat.Controllers
 {
-    [Authorize(Roles = "Admin,Student")]
+    [Authorize(Roles = "Admin,Lecturer,Student")]
     [Route("api/[controller]")]
     [ApiController]
     public class StudentController : ControllerBase

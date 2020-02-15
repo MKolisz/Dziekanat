@@ -17,7 +17,9 @@ namespace Dziekanat.Helpers
             CreateMap<StudentRegisterModel, Student>();
             CreateMap<StudentUpdateModel, Student>();
 
+            CreateMap<Employee, EmployeeModel>();
             CreateMap<EmployeeRegisterModel, Employee>();
+            CreateMap<EmployeeUpdateModel, Employee>();
         }
     }
 }
