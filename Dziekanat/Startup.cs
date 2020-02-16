@@ -92,6 +92,7 @@ namespace Dziekanat
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<ISubjectService, SubjectService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

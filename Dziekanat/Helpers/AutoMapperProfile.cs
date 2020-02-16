@@ -2,6 +2,7 @@
 using Dziekanat.Entities;
 using Dziekanat.Models.Employee;
 using Dziekanat.Models.Student;
+using Dziekanat.Models.Subject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,9 @@ namespace Dziekanat.Helpers
             CreateMap<Employee, EmployeeModel>();
             CreateMap<EmployeeRegisterModel, Employee>();
             CreateMap<EmployeeUpdateModel, Employee>();
+
+            CreateMap<Subject, SubjectModel>();
+            CreateMap<SubjectCreateModel, Subject>();
         }
     }
 }
