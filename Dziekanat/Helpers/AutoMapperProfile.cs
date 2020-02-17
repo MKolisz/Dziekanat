@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Dziekanat.Entities;
 using Dziekanat.Models.Employee;
+using Dziekanat.Models.Grade;
 using Dziekanat.Models.Student;
 using Dziekanat.Models.Subject;
 using System;
@@ -24,6 +25,10 @@ namespace Dziekanat.Helpers
 
             CreateMap<Subject, SubjectModel>();
             CreateMap<SubjectCreateModel, Subject>();
+
+            CreateMap<Grade, GradeModel>();
+            CreateMap<GradeCreateModel, Grade>();
+            CreateMap<GradeUpdateModel, Grade>();
         }
     }
 }
