@@ -37,6 +37,7 @@ namespace Dziekanat.Helpers
 
             CreateMap<Classes, ClassesModel>();
             CreateMap<ClassesCreateModel, Classes>();
+
         }
     }
 }

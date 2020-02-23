@@ -42,6 +42,7 @@ namespace Dziekanat
             services.AddDbContext<GroupContext>(options => options.UseSqlServer(Configuration.GetSection("Db")["ConnectionString"]));
             services.AddDbContext<SubjectContext>(options => options.UseSqlServer(Configuration.GetSection("Db")["ConnectionString"]));
             services.AddDbContext<student_groupContext>(options => options.UseSqlServer(Configuration.GetSection("Db")["ConnectionString"]));
+            services.AddDbContext<FileContext>(options => options.UseSqlServer(Configuration.GetSection("Db")["ConnectionString"]));
 
             services.AddCors();
             services.AddControllers();
