@@ -8,6 +8,7 @@ using Dziekanat.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Dziekanat.Controllers
 {
@@ -37,7 +38,7 @@ namespace Dziekanat.Controllers
 
             //create file object in database storing real name of the file, id and employeeId
             int myId = int.Parse(User.Identity.Name);
-            Entities.File fileParam = new Entities.File() { Employee_Id = myId, File_Name = file.FileName, Storage_Name="tmp" };
+            Entities.File fileParam = new Entities.File() { Employee_Id = myId, File_Name = file.FileName, Storage_Name = "tmp" };
             _fileContext.File.Add(fileParam);
             _fileContext.SaveChanges();
 
@@ -45,7 +46,7 @@ namespace Dziekanat.Controllers
             string newFileName = DateTime.Now + "_" + fileParam.File_Id;
             newFileName = newFileName.Replace(".", "-");
             newFileName = newFileName.Replace(":", "-");
-            newFileName = newFileName +"."+ file.FileName.Split(".")[1];
+            newFileName = newFileName + "." + file.FileName.Split(".")[1];
 
 
             //insert storage name into database
@@ -70,5 +71,46 @@ namespace Dziekanat.Controllers
             // return the file name for the locally stored file
             return Ok(newFileName);
         }
+
+
+        [Authorize(Roles = "Lecturer, Student")]
+        [HttpGet("download/{id}")]
+        public async Task<IActionResult> Download(int id)
+        {
+            int employeeId = _fileContext.File.Find(id).Employee_Id;
+            string employeeName = _employeeContext.Employee.Find(employeeId).First_Name + "_" + _employeeContext.Employee.Find(employeeId).Last_Name;
+            string path = storagePath + employeeName;
+
+            string[] fileNames = Directory.GetFiles(path);
+
+            foreach (string file in fileNames)
+            {
+                var splt = file.Split("\\");
+                if (splt[splt.Length-1].Split("_")[1].Split(".")[0] == id.ToString())
+                {
+                    path = file;
+                    break;
+                }
+            }
+
+            if (System.IO.File.Exists(path))
+            {
+
+                // Get all bytes of the file and return the file with the specified file contents 
+                byte[] b = await System.IO.File.ReadAllBytesAsync(path);
+                Response.Headers.Add("filename",_fileContext.File.Find(id).File_Name);
+                return File(b, "application/octet-stream");
+
+                
+            }
+
+            else
+            {
+                // return error if file not found
+                return StatusCode(StatusCodes.Status500InternalServerError);
+            }
+
+        }
+
     }
 }
