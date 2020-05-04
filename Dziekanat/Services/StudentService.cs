@@ -11,6 +11,7 @@ namespace Dziekanat.Services
     {
         Student Create(Student student, string password);
         void Update(Student studentParam, int studentId);
+        void UploadImage(int studentId, byte[] image);
         Student GetById(int studentId);
         IEnumerable<Student> GetAll();
         public void Delete(int studentId);
@@ -88,6 +89,15 @@ namespace Dziekanat.Services
             _context.SaveChanges();
         }
 
+        public void UploadImage(int studentId, byte[] image)
+        {
+            var student = _context.Student.Find(studentId);
+
+            if (image.Length > 0)
+                student.Image = image;
+            _context.Student.Update(student);
+            _context.SaveChanges();
+        }
 
         public Student GetById(int studentId)
         {

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Dziekanat.Entities;
@@ -15,7 +17,7 @@ namespace Dziekanat.Controllers
 {
     [Authorize(Roles = "Admin,Lecturer,Student")]
     [Route("api/[controller]")]
-    [ApiController]
+    [ApiController] 
     public class StudentController : ControllerBase
     {
 
@@ -65,6 +67,29 @@ namespace Dziekanat.Controllers
                 // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("uploadImage/{studentId}")]
+        public IActionResult UploadImage(int studentId, IFormFile imgFile)
+        {
+            byte[] bytes;
+            using (var reader = new StreamReader(imgFile.OpenReadStream()))
+            {
+                var x = reader.ReadToEnd();
+                bytes = Encoding.ASCII.GetBytes(x);
+            }
+            try
+            {
+                _studentService.UploadImage(studentId, bytes);
+                return Ok();
+            }
+            catch (AppException ex)
+            {
+                // return error message if there was an exception
+                return BadRequest(new { message = ex.Message });
+            }
+
         }
 
         [Authorize(Roles = "Student")]
@@ -121,6 +146,7 @@ namespace Dziekanat.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
 
         [Authorize(Roles ="Admin,Lecturer")]
         [HttpGet]
